@@ -70,7 +70,7 @@ class _SignupState extends State<Signup> {
                 ),
               ),
 
-              //password side
+              //password editted side
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Container(

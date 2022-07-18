@@ -55,12 +55,8 @@ class _firstpageState extends State<firstpage> {
               ListTile(
                 title: const Text('Logout'),
                 onTap: () {
-                  Navigator.pushReplacement(context,
+                  Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Splash()));
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
                 },
               ),
             ],

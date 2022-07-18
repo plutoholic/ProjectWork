@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectwork/splash.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -113,7 +114,12 @@ class _SignupState extends State<Signup> {
               ),
 
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Splash()));
+                  },
                   style: ElevatedButton.styleFrom(
                       primary: Colors.blue, elevation: 5),
                   child: const Padding(

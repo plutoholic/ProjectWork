@@ -1,4 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:projectwork/firstpage.dart';
+import 'package:projectwork/signup.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -72,7 +75,12 @@ class _SplashState extends State<Splash> {
 
               //signin button
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const firstpage()));
+                  },
                   style: ElevatedButton.styleFrom(
                       primary: Colors.green, elevation: 5),
                   child: const Padding(

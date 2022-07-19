@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/widgets.dart';
+import 'package:projectwork/profile.dart';
 import 'package:projectwork/splash.dart';
 
 class firstpage extends StatefulWidget {
@@ -31,36 +33,48 @@ class _firstpageState extends State<firstpage> {
             )
           ]),
         ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
+        drawer: GestureDetector(
+          child: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                  ),
+                  child: Text(
+                    'Profile',
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
-                child: Text(
-                  'Profile',
+                ListTile(
+                  title: const Text(
+                    'Check Stats',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                 ),
-              ),
-              ListTile(
-                title: const Text('Check Stats'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Logout'),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Splash()));
-                },
-              ),
-            ],
+                ListTile(
+                  title: const Text(
+                    'Logout',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Splash()));
+                  },
+                ),
+              ],
+            ),
           ),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const profile()));
+          },
         ),
       ),
     );

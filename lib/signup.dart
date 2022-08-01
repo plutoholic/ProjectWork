@@ -19,28 +19,33 @@ class _SignupState extends State<Signup> {
           color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text("SMARTEX",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 60,
-                      fontWeight: FontWeight.bold)),
+              const Center(
+                child: Text("SMARTEX",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 60,
+                        fontWeight: FontWeight.bold)),
+              ),
 
-              const Text("Register Account",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
+              const Center(
+                child: Text("Register Account",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+              ),
 
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black),
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.only(left: 8.0),
+                    padding: EdgeInsets.only(left: 12.0),
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Username',
@@ -56,11 +61,11 @@ class _SignupState extends State<Signup> {
                 padding: const EdgeInsets.all(12.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black),
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.only(left: 8.0),
+                    padding: EdgeInsets.only(left: 12.0),
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Email',
@@ -76,11 +81,11 @@ class _SignupState extends State<Signup> {
                 padding: const EdgeInsets.all(12.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black),
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.only(left: 8.0),
+                    padding: EdgeInsets.only(left: 12.0),
                     child: TextField(
                       obscureText: true,
                       decoration: InputDecoration(
@@ -97,11 +102,11 @@ class _SignupState extends State<Signup> {
                 padding: const EdgeInsets.all(12.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black),
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.only(left: 8.0),
+                    padding: EdgeInsets.only(left: 12.0),
                     child: TextField(
                       obscureText: true,
                       decoration: InputDecoration(
@@ -113,22 +118,27 @@ class _SignupState extends State<Signup> {
                 ),
               ),
 
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Splash()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.blue, elevation: 5),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Sign up",
-                      style: TextStyle(fontSize: 30),
-                    ),
-                  )),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Splash()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        shape: StadiumBorder(),
+                        primary: Colors.blue,
+                        elevation: 3),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Sign up",
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    )),
+              ),
 
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),

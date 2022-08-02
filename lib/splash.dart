@@ -20,24 +20,27 @@ class _SplashState extends State<Splash> {
           width: size.width,
           color: Colors.white,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("SMARTEX",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 60,
-                      fontWeight: FontWeight.bold)),
+              const Center(
+                child: Text("SMARTEX",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 60,
+                        fontWeight: FontWeight.bold)),
+              ),
 
               //email side
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black),
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.only(left: 8.0),
+                    padding: EdgeInsets.only(left: 12.0),
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Email',
@@ -53,11 +56,11 @@ class _SplashState extends State<Splash> {
                 padding: const EdgeInsets.all(12.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black),
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.only(left: 8.0),
+                    padding: EdgeInsets.only(left: 12.0),
                     child: TextField(
                       obscureText: true,
                       decoration: InputDecoration(
@@ -74,22 +77,27 @@ class _SplashState extends State<Splash> {
               ),
 
               //signin button
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const firstpage()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.green, elevation: 5),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Login",
-                      style: TextStyle(fontSize: 30),
-                    ),
-                  )),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const firstpage()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        shape: StadiumBorder(),
+                        primary: Colors.green,
+                        elevation: 3),
+                    child: const Padding(
+                      padding: EdgeInsets.only(top: 8.0, bottom: 8),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    )),
+              ),
 
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
@@ -106,6 +114,31 @@ class _SplashState extends State<Splash> {
                       ),
                       Text(
                         "  Sign up",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontSize: 20,
+                        ),
+                      )
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Signup()));
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: GestureDetector(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        "Forgotten password?",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,

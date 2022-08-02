@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
+import 'package:projectwork/addDevice.dart';
+import 'package:projectwork/checkstats.dart';
 import 'package:projectwork/profile.dart';
 import 'package:projectwork/splash.dart';
 
@@ -25,13 +27,47 @@ class _firstpageState extends State<firstpage> {
           elevation: 0.5,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(children: const [
-            Text(
-              "Devices",
-              style: TextStyle(fontSize: 24),
-            )
-          ]),
+          padding: EdgeInsets.all(15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Center(
+                child: Text(
+                  "Devices",
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const addDevice()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      shape: StadiumBorder(),
+                      primary: Colors.black,
+                      elevation: 3),
+                  child: const Padding(
+                    padding: EdgeInsets.only(
+                      top: 15.0,
+                      bottom: 15,
+                    ),
+                    child: Text(
+                      "Add Device",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )),
+            ],
+          ),
         ),
         drawer: GestureDetector(
           child: Drawer(
@@ -53,7 +89,22 @@ class _firstpageState extends State<firstpage> {
                     style: TextStyle(fontSize: 20),
                   ),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const checkstats()));
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    'Add Device',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const addDevice()));
                   },
                 ),
                 ListTile(

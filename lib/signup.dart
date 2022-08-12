@@ -1,14 +1,48 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projectwork/splash.dart';
 
 class Signup extends StatefulWidget {
-  const Signup({Key? key}) : super(key: key);
+  final VoidCallback showSplash;
+  const Signup({Key? key, required this.showSplash}) : super(key: key);
 
   @override
   State<Signup> createState() => _SignupState();
 }
 
 class _SignupState extends State<Signup> {
+  //controller
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _checkpasswordController = TextEditingController();
+  final _username = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _checkpasswordController.dispose();
+    super.dispose();
+  }
+
+  Future enterme() async {
+    if (passwordconfirm()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    }
+  }
+
+  bool passwordconfirm() {
+    if (_passwordController.text.trim() ==
+        _checkpasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -44,10 +78,11 @@ class _SignupState extends State<Signup> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: _username,
+                      decoration: const InputDecoration(
                         hintText: 'Username',
                         border: InputBorder.none,
                       ),
@@ -64,10 +99,11 @@ class _SignupState extends State<Signup> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: _emailController,
+                      decoration: const InputDecoration(
                         hintText: 'Email',
                         border: InputBorder.none,
                       ),
@@ -84,11 +120,12 @@ class _SignupState extends State<Signup> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
                     child: TextField(
+                      controller: _passwordController,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Password',
                         border: InputBorder.none,
                       ),
@@ -105,11 +142,12 @@ class _SignupState extends State<Signup> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
                     child: TextField(
+                      controller: _checkpasswordController,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Confirm Password',
                         border: InputBorder.none,
                       ),
@@ -121,12 +159,7 @@ class _SignupState extends State<Signup> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Splash()));
-                    },
+                    onPressed: enterme,
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
                         primary: Colors.blue,
@@ -142,33 +175,28 @@ class _SignupState extends State<Signup> {
 
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
-                child: GestureDetector(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Already have account?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Already have account?",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
-                      Text(
+                    ),
+                    GestureDetector(
+                      onTap: widget.showSplash,
+                      child: const Text(
                         "  Sign in",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,
                           fontSize: 20,
                         ),
-                      )
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Splash()));
-                  },
+                      ),
+                    )
+                  ],
                 ),
               ),
             ],

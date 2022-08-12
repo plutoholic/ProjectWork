@@ -5,7 +5,8 @@ import 'package:projectwork/firstpage.dart';
 import 'package:projectwork/signup.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
+  final VoidCallback showSignup;
+  const Splash({Key? key, required this.showSignup}) : super(key: key);
 
   @override
   State<Splash> createState() => _SplashState();
@@ -117,58 +118,45 @@ class _SplashState extends State<Splash> {
 
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
-                child: GestureDetector(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Don't have account?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have account?",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
-                      Text(
+                    ),
+                    GestureDetector(
+                      onTap: widget.showSignup,
+                      child: const Text(
                         "  Sign up",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,
                           fontSize: 20,
                         ),
-                      )
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Signup()));
-                  },
+                      ),
+                    )
+                  ],
                 ),
               ),
 
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
-                child: GestureDetector(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Forgotten password?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                          fontSize: 20,
-                        ),
-                      )
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Signup()));
-                  },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      "Forgotten password?",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                        fontSize: 20,
+                      ),
+                    )
+                  ],
                 ),
               ),
             ],

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -15,6 +16,7 @@ class profile extends StatefulWidget {
 }
 
 class _profileState extends State<profile> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -57,9 +59,9 @@ class _profileState extends State<profile> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const Text(
-                        "addaifrancis9@gmail.com",
-                        style: TextStyle(
+                      Text(
+                        "Email:" + user.email!,
+                        style: const TextStyle(
                           fontSize: 18,
                         ),
                       ),

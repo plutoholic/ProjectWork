@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:projectwork/firstpage.dart';
@@ -11,6 +12,24 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  //controller
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -39,10 +58,11 @@ class _SplashState extends State<Splash> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: _emailController,
+                      decoration: const InputDecoration(
                         hintText: 'Email',
                         border: InputBorder.none,
                       ),
@@ -59,11 +79,12 @@ class _SplashState extends State<Splash> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
                     child: TextField(
+                      controller: _passwordController,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Password',
                         border: InputBorder.none,
                       ),
@@ -80,12 +101,7 @@ class _SplashState extends State<Splash> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const firstpage()));
-                    },
+                    onPressed: signIn,
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
                         primary: Colors.green,

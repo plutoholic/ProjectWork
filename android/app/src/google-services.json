@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "967128216589",
+    "project_id": "smartex-fc0ff",
+    "storage_bucket": "smartex-fc0ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967128216589:android:4ee704d7298ed823071144",
+        "android_client_info": {
+          "package_name": "com.example.projectwork"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967128216589-95sg37tk3jv94n1m2gilnfnv7q84g05j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyS-KwkQgprkc1v5D_A-vsFevFVy5PuyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967128216589-95sg37tk3jv94n1m2gilnfnv7q84g05j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,16 +1,36 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:projectwork/firstpage.dart';
 import 'package:projectwork/signup.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
+  final VoidCallback showSignup;
+  const Splash({Key? key, required this.showSignup}) : super(key: key);
 
   @override
   State<Splash> createState() => _SplashState();
 }
 
 class _SplashState extends State<Splash> {
+  //controller
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -39,10 +59,11 @@ class _SplashState extends State<Splash> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
                     child: TextField(
-                      decoration: InputDecoration(
+                      controller: _emailController,
+                      decoration: const InputDecoration(
                         hintText: 'Email',
                         border: InputBorder.none,
                       ),
@@ -59,11 +80,12 @@ class _SplashState extends State<Splash> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
                     child: TextField(
+                      controller: _passwordController,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Password',
                         border: InputBorder.none,
                       ),
@@ -80,12 +102,7 @@ class _SplashState extends State<Splash> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const firstpage()));
-                    },
+                    onPressed: signIn,
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
                         primary: Colors.green,
@@ -101,58 +118,45 @@ class _SplashState extends State<Splash> {
 
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
-                child: GestureDetector(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Don't have account?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have account?",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
-                      Text(
+                    ),
+                    GestureDetector(
+                      onTap: widget.showSignup,
+                      child: const Text(
                         "  Sign up",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,
                           fontSize: 20,
                         ),
-                      )
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Signup()));
-                  },
+                      ),
+                    )
+                  ],
                 ),
               ),
 
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
-                child: GestureDetector(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Forgotten password?",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                          fontSize: 20,
-                        ),
-                      )
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Signup()));
-                  },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      "Forgotten password?",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                        fontSize: 20,
+                      ),
+                    )
+                  ],
                 ),
               ),
             ],

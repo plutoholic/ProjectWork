@@ -20,10 +20,23 @@ class _checkstatsState extends State<checkstats> {
         appBar: AppBar(
           title: const Text("Check Stats"),
         ),
-        body: const Center(
-          child: Text(
-            "Check Stats",
-            style: TextStyle(fontSize: 20),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            children: [
+              Text(
+                "Voltage",
+                style: TextStyle(fontSize: 20),
+              ),
+              Text(
+                "     Current",
+                style: TextStyle(fontSize: 20),
+              ),
+              Text(
+                "     Total Power Usage",
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
           ),
         ),
       ),

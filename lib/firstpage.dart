@@ -60,7 +60,7 @@ class _firstpageState extends State<firstpage> {
                       bottom: 15,
                     ),
                     child: Text(
-                      "Add Device",
+                      "Device Control",
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -98,7 +98,7 @@ class _firstpageState extends State<firstpage> {
                 ),
                 ListTile(
                   title: const Text(
-                    'Add Device',
+                    'Device Control',
                     style: TextStyle(fontSize: 20),
                   ),
                   onTap: () {

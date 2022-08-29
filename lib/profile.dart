@@ -108,7 +108,7 @@ class _profileState extends State<profile> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                     shape: StadiumBorder(),
-                                    primary: Colors.white,
+                                    primary: Color.fromARGB(255, 0, 0, 0),
                                     elevation: 3),
                                 child: const Padding(
                                   padding: EdgeInsets.only(
@@ -117,6 +117,34 @@ class _profileState extends State<profile> {
                                   ),
                                   child: Text(
                                     "Check Usage",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                    ),
+                                  ),
+                                )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 20,
+                              left: 12,
+                              right: 12,
+                            ),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  FirebaseAuth.instance.signOut();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    shape: StadiumBorder(),
+                                    primary: Colors.white,
+                                    elevation: 3),
+                                child: const Padding(
+                                  padding: EdgeInsets.only(
+                                    top: 15.0,
+                                    bottom: 15,
+                                  ),
+                                  child: Text(
+                                    "Logout",
                                     style: TextStyle(
                                       fontSize: 20,
                                       color: Colors.black,

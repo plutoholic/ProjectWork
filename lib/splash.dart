@@ -143,22 +143,22 @@ class _SplashState extends State<Splash> {
                 ),
               ),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      "Forgotten password?",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                        fontSize: 20,
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 10.0),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: const [
+              //       Text(
+              //         "Forgotten password?",
+              //         style: TextStyle(
+              //           fontWeight: FontWeight.bold,
+              //           color: Colors.blue,
+              //           fontSize: 20,
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

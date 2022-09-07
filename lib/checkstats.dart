@@ -13,6 +13,7 @@ class checkstats extends StatefulWidget {
 }
 
 class _checkstatsState extends State<checkstats> {
+  var date = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,20 +22,58 @@ class _checkstatsState extends State<checkstats> {
           title: const Text("Check Stats"),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Row(
+          padding: const EdgeInsets.only(top: 20.0),
+          child: Column(
             children: [
-              Text(
-                "Voltage",
-                style: TextStyle(fontSize: 20),
+              Center(
+                child: Container(
+                  width: 300,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Voltage: 220V - 230V",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
               ),
-              Text(
-                "     Current",
-                style: TextStyle(fontSize: 20),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Container(
+                  width: 300,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Current: ",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
               ),
-              Text(
-                "     Total Power Usage",
-                style: TextStyle(fontSize: 20),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Container(
+                  width: 300,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Power used as at \n" "$date",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

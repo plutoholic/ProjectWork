@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -12,10 +14,14 @@ class addDevice extends StatefulWidget {
 }
 
 class _addDeviceState extends State<addDevice> {
-  bool isSwitched1 = false;
-  bool isSwitched2 = false;
-  bool isSwitched3 = false;
-  bool isSwitched4 = false;
+  final realtime = FirebaseDatabase.instance;
+  final firestoreInst = FirebaseFirestore.instance;
+  Switches main = Switches('main', false);
+  List<Switches> switches = [
+    Switches('switch1', false),
+    Switches('switch2', false),
+    Switches('switch3', false),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -47,120 +53,65 @@ class _addDeviceState extends State<addDevice> {
                     Column(
                       children: <Widget>[
                         Switch(
-                          value: isSwitched4,
+                          value: main.state,
                           onChanged: (value) {
                             setState(() {
-                              isSwitched1 = value;
-                              isSwitched2 = value;
-                              isSwitched3 = value;
-                              isSwitched4 = value;
+                              main.state = value;
+                              if (!main.state) {
+                                switches.forEach((e) {
+                                  e.state = false;
+
+                                  createUser(name: e.name, state: e.state);
+                                });
+                              }
+                              createUser(name: main.name, state: main.state);
                             });
                           },
                         ),
                       ],
                     ),
-                    Container(
-                      height: 150,
-                      width: 150,
-                      margin: const EdgeInsets.only(
-                        top: 20,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(66, 111, 111, 111),
-                            blurRadius: 10,
-                          ),
-                        ],
-                        image: DecorationImage(
-                          image: AssetImage("assets/socket.png"),
+                    ...List.generate(
+                      switches.length,
+                      (index) => Container(
+                        height: 150,
+                        width: 150,
+                        margin: const EdgeInsets.only(
+                          top: 20,
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Column(
-                          children: <Widget>[
-                            Switch(
-                              value: isSwitched1,
-                              onChanged: (value) {
-                                setState(() {
-                                  isSwitched1 = value;
-                                });
-                              },
+                        decoration: const BoxDecoration(
+                          color: Colors.blue,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(66, 111, 111, 111),
+                              blurRadius: 10,
                             ),
                           ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 150,
-                      width: 150,
-                      margin: const EdgeInsets.only(
-                        top: 20,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(66, 111, 111, 111),
-                            blurRadius: 10,
+                          image: DecorationImage(
+                            image: AssetImage("assets/socket.png"),
                           ),
-                        ],
-                        image: DecorationImage(
-                          image: AssetImage("assets/socket.png"),
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Column(
-                          children: <Widget>[
-                            Switch(
-                              value: isSwitched2,
-                              onChanged: (value) {
-                                setState(() {
-                                  isSwitched2 = value;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 150,
-                      width: 150,
-                      margin: const EdgeInsets.only(
-                        top: 20,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(66, 111, 111, 111),
-                            blurRadius: 10,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Column(
+                            children: <Widget>[
+                              Switch(
+                                value: switches[index].state,
+                                onChanged: !main.state
+                                    ? null
+                                    : (value) {
+                                        setState(() {
+                                          switches[index].state = value;
+                                          createUser(
+                                              name: switches[index].name,
+                                              state: switches[index].state);
+                                        });
+                                      },
+                              ),
+                            ],
                           ),
-                        ],
-                        image: DecorationImage(
-                          image: AssetImage("assets/socket.png"),
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Column(
-                          children: <Widget>[
-                            Switch(
-                              value: isSwitched3,
-                              onChanged: (value) {
-                                setState(() {
-                                  isSwitched3 = value;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -170,4 +121,21 @@ class _addDeviceState extends State<addDevice> {
       ),
     );
   }
+
+  Future createUser({required String name, required bool state}) async {
+    final docUser = FirebaseFirestore.instance.collection('Switch').doc(name);
+
+    final json = {
+      'name': name,
+      'state': state,
+    };
+    await docUser.set(json);
+  }
+}
+
+class Switches {
+  String name;
+  bool state;
+
+  Switches(this.name, this.state);
 }

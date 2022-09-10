@@ -2,12 +2,13 @@
 #include <WiFiClient.h>
 #include <WiFiServer.h>
 #include <WiFiUdp.h>
+#include<ACS712.h>
 
 
 #define FIREBASE_HOST "example.firebaseio.com"
-#define FIREBASE_AUTH "token_or_secret"
-#define WIFI_SSID "SSID"
-#define WIFI_PASSWORD "PASSWORD"
+#define FIREBASE_AUTH "CNruMODtNxty79LDbCrz7uzwgbOnxHWxIcHWTDQh"
+#define WIFI_SSID "SMARTEX"
+#define WIFI_PASSWORD "smartext"
 
 #include <ArduinoJson.h>
 #include <Firebase.h>
@@ -59,10 +60,10 @@ void setup() {
   Serial.println(WiFi.localIP());
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
 }
-socker1_power = (SYS_Voltage * current_sensor1_value);
-socker2_power = (SYS_Voltage * current_sensor2_value);
-socker3_power = (SYS_Voltage * current_sensor3_value);
-socker4_power = (SYS_Voltage * current_sensor4_value);
+socker1_power used = (SYS_Voltage * current_sensor1_value);
+socker2_power used = (SYS_Voltage * current_sensor2_value);
+socker3_power used = (SYS_Voltage * current_sensor3_value);
+socker4_power used = (SYS_Voltage * current_sensor4_value);
 
 a = 1;
 b = 1;
@@ -140,24 +141,38 @@ void loop() {
           }
         }
       case '5': {
-          float sense1 = analogRead(r5);
-          Firebase.setFloat("sensor1", d);
+          float current_sensor1_value = analogRead(r5);
+          Firebase.setFloat("current_sensor1_value", current_sensor1_value);
           delay(50000);
 
         }
     }
   case '6': {
-      float sense2 = analogRead(r6);
-      Firebase.setFloat("sensor2", sense2);
+      float current_sensor2 = analogRead(r6);
+      Firebase.setFloat("current_sensor2_value", current_sensor2_value);
       delay(50000);
 
     }
   case '7' : {
-      float sense3 = analogRead(r7);
-      Firebase.setFloat("sensor3", sense3);
+      float current_sensor3 = analogRead(r7);
+      Firebase.setFloat("current_sensor3_value", current_sensor_3_value);
       delay(50000);
 
     }
+    case '8' :{
+      float socket1_power_used = digitalRead(r1);
+      Firebase.getFloat("Socket1_power used",socket1_power used);
+      delay(50000);
+  }
+   case '9' :{
+      float socket2_power_used = digitalRead(r2);
+      Firebase.getFloat("Socket2_power used",socket2_power used);
+      delay(50000);
+  }
+   case '10' :{
+      float socket1_power_used = digitalRead(r3);
+      Firebase.getFloat("Socket3_power used",socket3_power used);
+      delay(50000);
   }
 }
 }

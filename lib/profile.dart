@@ -88,7 +88,7 @@ class _profileState extends State<profile> {
                                     bottom: 15,
                                   ),
                                   child: Text(
-                                    "Add Device / Remove",
+                                    "Device Control",
                                     style: TextStyle(fontSize: 20),
                                   ),
                                 )),

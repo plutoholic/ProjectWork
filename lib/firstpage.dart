@@ -67,6 +67,33 @@ class _firstpageState extends State<firstpage> {
                       ),
                     ),
                   )),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const checkstats()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        shape: StadiumBorder(),
+                        primary: Colors.black,
+                        elevation: 3),
+                    child: const Padding(
+                      padding: EdgeInsets.only(
+                        top: 15.0,
+                        bottom: 15,
+                      ),
+                      child: Text(
+                        "Check Stats",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )),
+              ),
             ],
           ),
         ),

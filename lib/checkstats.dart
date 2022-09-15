@@ -30,13 +30,15 @@ class _checkstatsState extends State<checkstats> {
                   width: 300,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.grey[200],
+                    color: Colors.blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(
                     child: Text(
                       "Voltage: 220V - 230V",
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),
@@ -47,7 +49,7 @@ class _checkstatsState extends State<checkstats> {
                   width: 300,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.grey[200],
+                    color: Colors.blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(
@@ -64,7 +66,7 @@ class _checkstatsState extends State<checkstats> {
                   width: 300,
                   height: 100,
                   decoration: BoxDecoration(
-                    color: Colors.grey[200],
+                    color: Colors.blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(

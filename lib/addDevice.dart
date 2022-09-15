@@ -16,11 +16,11 @@ class addDevice extends StatefulWidget {
 class _addDeviceState extends State<addDevice> {
   final realtime = FirebaseDatabase.instance;
   final firestoreInst = FirebaseFirestore.instance;
-  Switches main = Switches('main', false);
+  Switches mains = Switches('D1', false);
   List<Switches> switches = [
-    Switches('switch1', false),
-    Switches('switch2', false),
-    Switches('switch3', false),
+    Switches('D2', false),
+    Switches('D3', false),
+    Switches('D4', false),
   ];
 
   @override
@@ -53,18 +53,18 @@ class _addDeviceState extends State<addDevice> {
                     Column(
                       children: <Widget>[
                         Switch(
-                          value: main.state,
+                          value: mains.state,
                           onChanged: (value) {
                             setState(() {
-                              main.state = value;
-                              if (!main.state) {
+                              mains.state = value;
+                              if (!mains.state) {
                                 switches.forEach((e) {
                                   e.state = false;
 
                                   createUser(name: e.name, state: e.state);
                                 });
                               }
-                              createUser(name: main.name, state: main.state);
+                              createUser(name: mains.name, state: mains.state);
                             });
                           },
                         ),
@@ -96,14 +96,15 @@ class _addDeviceState extends State<addDevice> {
                             children: <Widget>[
                               Switch(
                                 value: switches[index].state,
-                                onChanged: !main.state
+                                onChanged: !mains.state
                                     ? null
                                     : (value) {
                                         setState(() {
                                           switches[index].state = value;
                                           createUser(
-                                              name: switches[index].name,
-                                              state: switches[index].state);
+                                            name: switches[index].name,
+                                            state: switches[index].state,
+                                          );
                                         });
                                       },
                               ),
@@ -123,13 +124,14 @@ class _addDeviceState extends State<addDevice> {
   }
 
   Future createUser({required String name, required bool state}) async {
-    final docUser = FirebaseFirestore.instance.collection('Switch').doc(name);
+    final realtime = FirebaseDatabase.instance
+        .refFromURL('https://smartex-fc0ff-default-rtdb.firebaseio.com/$name');
+    // final docUser = FirebaseFirestore.instance.collection('https://smartex-fc0ff-default-rtdb.firebaseio.com').doc(name);
 
     final json = {
-      'name': name,
-      'state': state,
+      'state': state ? 1 : 0,
     };
-    await docUser.set(json);
+    await realtime.set(json);
   }
 }
 

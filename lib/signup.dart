@@ -47,10 +47,11 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SafeArea(
-      child: Scaffold(
-        body: Container(
-          width: size.width,
-          color: Colors.white,
+        child: Scaffold(
+      body: Container(
+        width: size.width,
+        color: Colors.white,
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -203,6 +204,6 @@ class _SignupState extends State<Signup> {
           ),
         ),
       ),
-    );
+    ));
   }
 }

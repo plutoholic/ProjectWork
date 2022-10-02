@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +22,13 @@ class _addDeviceState extends State<addDevice> {
     Switches('D4', false),
   ];
 
+  initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await fetchUser();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,7 +38,7 @@ class _addDeviceState extends State<addDevice> {
           backgroundColor: Colors.blue,
           elevation: 0.5,
         ),
-        body: SizedBox(
+        body: SingleChildScrollView(
           child: Column(
             children: [
               Padding(
@@ -132,6 +138,22 @@ class _addDeviceState extends State<addDevice> {
       'state': state ? 1 : 0,
     };
     await realtime.set(json);
+  }
+
+  Future fetchUser() async {
+    final realtime = FirebaseDatabase.instance
+        .refFromURL('https://smartex-fc0ff-default-rtdb.firebaseio.com/');
+    // final docUser = FirebaseFirestore.instance.collection('https://smartex-fc0ff-default-rtdb.firebaseio.com').doc(name);
+
+    final result = await realtime.get();
+    final value = result.value as Map;
+    print(value["D1"]);
+    mains.state = value["D1"]["state"] == 1;
+    switches[0].state = value['D2']["state"] == 1;
+    switches[1].state = value['D3']["state"] == 1;
+    switches[2].state = value['D4']["state"] == 1;
+
+    setState(() {});
   }
 }
 
